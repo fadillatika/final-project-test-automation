@@ -39,38 +39,37 @@ configurations {
     }
 }
 
-tasks.register('apiTest') {
-    dependsOn assemble, testClasses
-    doLast {
-        javaexec {
-            main = 'io.cucumber.core.cli.Main'
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+def uiTags = findProperty('uiTags')?.takeIf { it?.isNotEmpty() }
+task cucumber(type: JavaExec) {
+    description = "Running Cucumber Test"
+    group = "verification"
+    dependsOn assemble, compileTestJava
+    mainClass.set("io.cucumber.core.cli.Main")
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+
+    doFirst {
+        if (findProperty('testType') == 'api') {
             args = [
+                    '--plugin', 'html:reports/cucumber-api-report.html',
                     '--plugin', 'pretty',
-                    '--plugin', 'html:reports/ApiCucumber.html',
-                    '--plugin, json:reports/ApiCucumber',
-                    '--glue', 'apiTest/stepDef',
+                    '--glue', 'apiAuto.stepDef',
                     '--tags', "@api",
                     'src/test/resources/featuresApi/'
             ]
-        }
-    }
-}
-
-tasks.register('uiTest') {
-    dependsOn assemble, testClasses
-    doLast {
-        javaexec {
-            main = 'io.cucumber.core.cli.Main'
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+        } else if (findProperty('testType') == 'web') {
             args = [
+                    '--plugin', 'html:reports/cucumber-ui-report.html',
                     '--plugin', 'pretty',
-                    '--plugin', 'html:reports/UiCucumber.html',
-                    '--plugin, json:reports/UiCucumber',
-                    '--glue', 'uiTest/stepDef',
+                    '--glue', 'uiTest.stepDef',
                     '--tags', "@web",
                     'src/test/resources/featuresUi/'
             ]
+            if (uiTags != null) {
+                args.add('--tags')
+                args.add("${uiTags}")
+            }
+        } else {
+            throw new GradleException("Please specify the testType property ('api' or 'ui')")
         }
     }
 }
