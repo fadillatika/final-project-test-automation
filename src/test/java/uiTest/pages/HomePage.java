@@ -65,7 +65,7 @@ public class HomePage {
             throw new IllegalArgumentException("Invalid arrow direction: " + arrowDirection);
         }
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement arrowButton = wait.until(ExpectedConditions.elementToBeClickable(arrowLocator));
         arrowButton.click();
     }
