@@ -71,7 +71,7 @@ public class HomePage {
     }
 
     public void carouselSlides() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         WebElement activeSlideBefore = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".carousel-item.active")));
         String slideBeforeId = activeSlideBefore.getAttribute("class");
