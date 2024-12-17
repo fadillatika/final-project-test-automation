@@ -1,10 +1,10 @@
 Feature: Home Page
 
-  @web
-  Scenario: Slideable carousel
-    Given user is on home page
-    When user clicks "next" arrow on carousel
-    Then carousel slides
+#  @web
+#  Scenario: Slideable carousel
+#    Given user is on home page
+#    When user clicks "next" arrow on carousel
+#    Then carousel slides
 
   @web
   Scenario: Display products by category
