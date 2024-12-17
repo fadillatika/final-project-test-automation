@@ -47,9 +47,10 @@ tasks.register('apiTest') {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--plugin', 'pretty',
-                    '--plugin', 'html:reports/cucumber-api-report.html',
-                    '--glue', 'stepDef',
-                    '--tags', "@ApiTest",
+                    '--plugin', 'html:reports/ApiCucumber.html',
+                    '--plugin, json:reports/ApiCucumber',
+                    '--glue', 'apiTest/stepDef',
+                    '--tags', "@api",
                     'src/test/resources/featuresApi/'
             ]
         }
@@ -64,9 +65,10 @@ tasks.register('uiTest') {
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--plugin', 'pretty',
-                    '--plugin', 'html:reports/cucumber-ui-report.html',
-                    '--glue', 'stepDef',
-                    '--tags', "@api",
+                    '--plugin', 'html:reports/UiCucumber.html',
+                    '--plugin, json:reports/UiCucumber',
+                    '--glue', 'uiTest/stepDef',
+                    '--tags', "@web",
                     'src/test/resources/featuresUi/'
             ]
         }
