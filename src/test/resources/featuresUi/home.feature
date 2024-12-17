@@ -3,8 +3,8 @@ Feature: Home Page
   @web
   Scenario: Display products by category
     Given user is on home page
-    When user clicks "Monitors" on categories
-    Then page display only products under "Monitors" category
+    When user clicks "Laptops" on categories
+    Then page display only products under "Laptops" category
 
   @web
   Scenario: Redirect to display products from all categories when click on the category header
