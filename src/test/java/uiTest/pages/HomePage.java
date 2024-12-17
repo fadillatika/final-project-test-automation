@@ -112,7 +112,7 @@ public class HomePage {
                 throw new IllegalArgumentException("invalid category:" + category);
         }
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("a[href^='prod.html?idp_=']")));
         List<WebElement> displayedProducts = driver.findElements(By.cssSelector("a[href^='prod.html?idp_=']"));
 
