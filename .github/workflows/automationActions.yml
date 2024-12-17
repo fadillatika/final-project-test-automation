@@ -21,7 +21,7 @@ jobs:
       - name: Setup gradlew
         run: chmod +x gradlew
       - name: Execute API Test
-        run: ./gradlew cucumber -PtestType=api
+        run: ./gradlew api
       - name: Upload API Report
         uses: actions/upload-artifact@v3
         with:
@@ -42,7 +42,7 @@ jobs:
       - name: Setup gradlew
         run: chmod +x gradlew
       - name: Execute UI Test
-        run: ./gradlew cucumber -PtestType=ui
+        run: ./gradlew web
       - name: Upload UI Report
         uses: actions/upload-artifact@v3
         with:
